@@ -13,7 +13,7 @@ Motivation
 Basic usage
 -----------
 
-The basic functions are `N` and `G` that stand for *New* and *Get* respectively.
+The basic functions are ``N`` and ``G`` that stand for *New* and *Get* respectively.
 First you have to define the schema of the data that you want to generate:
 ::
 
@@ -48,8 +48,8 @@ After that you can already generate your fixtures!
      'name': 'oCmy0ZsGS',
      'stats': {'average_daily_visits': 0.02137056342099064, 'last_day_visits': 21}}
 
-The function `N` takes an instance of `BaseSchema` as first argument and generates a fixture which is compliant with the schema provided.
-Obviously sometimes we would like to have more control over the fixture that we want generate, for this reason the `N` function also takes `**kwargs` opitional arguments to fix some specific fields:
+The function ``N`` takes an instance of ``BaseSchema`` as first argument and generates a fixture which is compliant with the schema provided.
+Obviously sometimes we would like to have more control over the fixture that we want generate, for this reason the ``N`` function also takes ``**kwargs`` opitional arguments to fix some specific fields:
 ::
 
     In [3]: N(SiteSchema(), active=False, stats__last_day_visits=30)
@@ -66,13 +66,13 @@ Obviously sometimes we would like to have more control over the fixture that we 
      'name': 'KEKasgW',
      'stats': {'average_daily_visits': 0.44985850259520865, 'last_day_visits': 30}}
 
-As you can see both `active` and `last_day_visits` has been set to the values provided. If the key you want to fix is at the top level of the object then just use the variable name, otherwise list all its ancestors by separating them with `_` as for `stats__last_day_visits`. If the resulting `**kwargs` key is not a valid python variable name, then pass it inside the `extra` argument:
+As you can see both ``active`` and ``last_day_visits`` has been set to the values provided. If the key you want to fix is at the top level of the object then just use the variable name, otherwise list all its ancestors by separating them with ``_`` as for ``stats__last_day_visits``. If the resulting ``**kwargs`` key is not a valid python variable name, then pass it inside the ``extra`` argument:
 ::
 
     In [3]: N(MySchema(), field1=False, extra={'field2__some-invalid-name!': 30})
 
 
-The `G` function does the same thing of the `N` function but additionaly takes a `pymongo` connection to a mongo collection as first argument:
+The ``G`` function does the same thing of the ``N`` function but additionaly takes a ``pymongo`` connection to a mongo collection as first argument:
 ::
 
     In [4]: G(conn['test-db']['test-coll'], SiteSchema(), active=False, stats__last_day_visits=30)
@@ -89,14 +89,14 @@ The `G` function does the same thing of the `N` function but additionaly takes a
 
 we have just created a fixture and inserted it inside the collection 'test-coll' of the database 'test-db'.
 
-The available fields that are all importable from `mongo_dynamic_fixture.fields` are the following:
+The available fields that are all importable from ``mongo_dynamic_fixture.fields`` are the following:
 
-- `IntegerField`
-- `DoubleField`
-- `BooleanField`
-- `StringField`
-- `ArrayField`
-- `ObjectField`
+- ``IntegerField``
+- ``DoubleField``
+- ``BooleanField``
+- ``StringField``
+- ``ArrayField``
+- ``ObjectField``
 
 
 A little more than basic usage
@@ -104,32 +104,32 @@ A little more than basic usage
 
 Each fields takes the following optional arguments:
 
-- `required` (default: `True`)
-- `null` (default: `False`)
-- `blank` (default: `False`)
-- `not_present_prob` (default: `0`)
-- `null_prob` (default: `0`)
-- `blank_prob` (default: `0`)
+- ``required`` (default: ``True``)
+- ``null`` (default: ``False``)
+- ``blank`` (default: ``False``)
+- ``not_present_prob`` (default: ``0``)
+- ``null_prob`` (default: ``0``)
+- ``blank_prob`` (default: ``0``)
 
-If `required` is `False`, then with a probability given by `not_present_prob` the field will not be present in the document.
+If ``required`` is ``False``, then with a probability given by ``not_present_prob`` the field will not be present in the document.
 
-If `null` is `True`, then with a probability given by `null_prob` the field will have a value of `None`.
+If ``null`` is ``True``, then with a probability given by ``null_prob`` the field will have a value of ``None``.
 
-If `blank` is `True`, then with a probability given by `blank_prob` the field will have a blank value which depends on the field.
+If ``blank`` is ``True``, then with a probability given by ``blank_prob`` the field will have a blank value which depends on the field.
 
 The blank fields for each fields are the following:
 
-- `IntegerField` -> `0`
-- `DoubleField` -> `0.0`
-- `BooleanField` -> `False`
-- `StringField` -> `''`
-- `ArrayField` -> `[]`
-- `ObjectField` -> `{}`
+- ``IntegerField`` -> ``0``
+- ``DoubleField`` -> ``0.0``
+- ``BooleanField`` -> ``False``
+- ``StringField`` -> ``''``
+- ``ArrayField`` -> ``[]``
+- ``ObjectField`` -> ``{}``
 
-`IntgerField` and `DoubleField` also take `min_value` and `max_value` as optional arguments, and `StringField` and `ArrayField` also take `min_length` and `max_length`.
-With `StringField` it's also possible to specify the charset of the string to generate by passing it to the `charset` optional argument (default: `string.ascii_letters + string.digits`).
+``IntgerField`` and ``DoubleField`` also take ``min_value`` and ``max_value`` as optional arguments, and ``StringField`` and ``ArrayField`` also take ``min_length`` and ``max_length``.
+With ``StringField`` it's also possible to specify the charset of the string to generate by passing it to the ``charset`` optional argument (default: ``string.ascii_letters + string.digits``).
 
-Now you might ask "And what is the purpose of `ObjectField`"? Suppose that you have a schema like the following:
+Now you might ask "And what is the purpose of ``ObjectField``"? Suppose that you have a schema like the following:
 ::
 
     class SiteSchema(BaseSchema):
@@ -152,7 +152,7 @@ Now you might ask "And what is the purpose of `ObjectField`"? Suppose that you h
              }
          }
 
-you can use `ObjectField` to write it in a more concise way:
+you can use ``ObjectField`` to write it in a more concise way:
 ::
 
     from mongo_dynamic_fixture.fields import ObjectField
@@ -182,7 +182,7 @@ Installation
 Compatiblity
 ------------
 
-Tested with `python2.7`.
+Tested with ``python2.7``.
 
 
 Contributing
