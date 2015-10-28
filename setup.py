@@ -13,7 +13,8 @@ packages = ['mongo_dynamic_fixture',
             'tests']
 
 requires = ['pymongo==3.0.3',
-            'mongobox==0.1.6']
+            'mongobox==0.1.6',
+            'six==1.10.0']
 
 classifiers = [
     'Development Status :: 4 - Beta',
@@ -21,6 +22,11 @@ classifiers = [
     'License :: OSI Approved :: MIT License',
     'Natural Language :: English',
     'Programming Language :: Python',
+    'Programming Language :: Python :: 2',
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.3',
+    'Programming Language :: Python :: 3.4',
     'Topic :: Database',
     'Topic :: Software Development :: Testing',
 ]

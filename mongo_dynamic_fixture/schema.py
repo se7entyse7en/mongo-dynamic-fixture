@@ -1,6 +1,8 @@
 import collections
 from collections import defaultdict
 
+import six
+
 from mongo_dynamic_fixture import fields
 
 
@@ -23,7 +25,7 @@ class BaseSchema(fields.ObjectField):
         infinite_defaultdict = lambda: defaultdict(infinite_defaultdict)
         overrider = infinite_defaultdict()
         keys_values = [(k.split('__'), v)
-                       for k, v in overrider_kwargs.iteritems()]
+                       for k, v in six.iteritems(overrider_kwargs)]
 
         for keys, value in keys_values:
             cd = overrider
@@ -35,7 +37,7 @@ class BaseSchema(fields.ObjectField):
         return dict(overrider)
 
     def _override(self, generated, overrider):
-        for k, v in overrider.iteritems():
+        for k, v in six.iteritems(overrider):
             if isinstance(v, collections.Mapping):
                 r = self._override(generated.get(k, {}), v)
                 generated[k] = r

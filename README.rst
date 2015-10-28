@@ -182,7 +182,10 @@ Installation
 Compatiblity
 ------------
 
-Tested with ``python2.7``.
+Tested with:
+
+- ``python2.7`` and ``pymongo>=2.0``
+- ``python3.3``, ``python3.4`` and ``pymongo>=2.2``
 
 
 Contributing

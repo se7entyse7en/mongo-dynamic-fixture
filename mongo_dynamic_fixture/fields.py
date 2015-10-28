@@ -2,6 +2,8 @@ import string
 import random
 import collections
 
+import six
+
 from mongo_dynamic_fixture.exceptions import NotGeneratedException
 
 
@@ -202,12 +204,12 @@ class ObjectField(BaseField):
 
         def _generate_value(schema):
             generated = {}
-            for k, v in schema.iteritems():
+            for k, v in six.iteritems(schema):
                 if isinstance(v, BaseField):
                     generated[k] = v.generate()
                 else:
                     sub_generated = {}
-                    for sub_k, sub_v in v.iteritems():
+                    for sub_k, sub_v in six.iteritems(v):
                         sub_generated[sub_k] = _generate_value({
                             sub_k: sub_v})[sub_k]
 
