@@ -17,6 +17,9 @@ from mongo_dynamic_fixture.fields import ObjectField
 from mongo_dynamic_fixture.exceptions import NotGeneratedException
 
 
+FIELDS_RANDOM_MODULE = 'mongo_dynamic_fixture.fields.random'
+
+
 class BaseFieldTestCase(unittest.TestCase):
 
     def test_not_implemented(self):
@@ -51,39 +54,39 @@ class IntegerFieldTestCase(unittest.TestCase):
             v.generate()
 
         v = IntegerField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             with self.assertRaises(NotGeneratedException):
                 v.generate()
 
         v = IntegerField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.randint = random.randint
             self.assertTrue(0 <= v.generate() <= 100)
 
     def test_nullable(self):
         v = IntegerField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.randint = random.randint
             self.assertTrue(0 <= v.generate() <= 100)
 
         v = IntegerField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.randint = random.randint
             self.assertIsNone(v.generate())
 
     def test_blankable(self):
         v = IntegerField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.randint = random.randint
             self.assertTrue(0 <= v.generate() <= 100)
 
         v = IntegerField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.randint = random.randint
             self.assertEqual(v.generate(), 0)
@@ -97,17 +100,17 @@ class IntegerFieldTestCase(unittest.TestCase):
         v = IntegerField(null=True, null_prob=0.3,
                          blank=True, blank_prob=0.3)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.randint = random.randint
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.randint = random.randint
             self.assertEqual(v.generate(), 0)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.randint = random.randint
             self.assertTrue(0 <= v.generate() <= 100)
@@ -118,17 +121,17 @@ class IntegerFieldTestCase(unittest.TestCase):
                          blank=True, blank_prob=0.3,
                          choices=choices)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.choice = random.choice
             self.assertEqual(v.generate(), 0)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), choices)
@@ -159,39 +162,39 @@ class DoubleFieldTestCase(unittest.TestCase):
             v.generate()
 
         v = DoubleField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             with self.assertRaises(NotGeneratedException):
                 v.generate()
 
         v = DoubleField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.uniform = random.uniform
             self.assertTrue(0 <= v.generate() <= 1)
 
     def test_nullable(self):
         v = DoubleField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.uniform = random.uniform
             self.assertTrue(0 <= v.generate() <= 1)
 
         v = DoubleField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.uniform = random.uniform
             self.assertIsNone(v.generate())
 
     def test_blankable(self):
         v = DoubleField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.uniform = random.uniform
             self.assertTrue(0 <= v.generate() <= 1)
 
         v = DoubleField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.uniform = random.uniform
             self.assertEqual(v.generate(), 0)
@@ -204,17 +207,17 @@ class DoubleFieldTestCase(unittest.TestCase):
     def test_nullable_blankable(self):
         v = DoubleField(null=True, null_prob=0.3, blank=True, blank_prob=0.3)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.uniform = random.uniform
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.uniform = random.uniform
             self.assertEqual(v.generate(), 0)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.uniform = random.uniform
             self.assertTrue(0 <= v.generate() <= 1)
@@ -224,17 +227,17 @@ class DoubleFieldTestCase(unittest.TestCase):
         v = DoubleField(null=True, null_prob=0.3, blank=True, blank_prob=0.3,
                         choices=choices)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.choice = random.choice
             self.assertEqual(v.generate(), 0)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), choices)
@@ -255,39 +258,39 @@ class BooleanFieldTestCase(unittest.TestCase):
             v.generate()
 
         v = BooleanField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             with self.assertRaises(NotGeneratedException):
                 v.generate()
 
         v = BooleanField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), [True, False])
 
     def test_nullable(self):
         v = BooleanField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), [True, False])
 
         v = BooleanField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             self.assertIsNone(v.generate())
 
     def test_blankable(self):
         v = BooleanField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), [True, False])
 
         v = BooleanField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             self.assertFalse(v.generate())
@@ -295,17 +298,17 @@ class BooleanFieldTestCase(unittest.TestCase):
     def test_nullable_blankable(self):
         v = BooleanField(null=True, null_prob=0.3, blank=True, blank_prob=0.3)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.choice = random.choice
             self.assertFalse(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), [True, False])
@@ -354,13 +357,13 @@ class StringFieldTestCase(unittest.TestCase):
             v.generate()
 
         v = StringField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             with self.assertRaises(NotGeneratedException):
                 v.generate()
 
         v = StringField(required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -371,7 +374,7 @@ class StringFieldTestCase(unittest.TestCase):
 
     def test_nullable(self):
         v = StringField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -381,14 +384,14 @@ class StringFieldTestCase(unittest.TestCase):
                                  for s in generated]))
 
         v = StringField(null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             generated = v.generate()
             self.assertIsNone(generated)
 
     def test_blankable(self):
         v = StringField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -398,7 +401,7 @@ class StringFieldTestCase(unittest.TestCase):
                                  for s in generated]))
 
         v = StringField(blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             generated = v.generate()
             self.assertEqual(generated, '')
@@ -411,17 +414,17 @@ class StringFieldTestCase(unittest.TestCase):
     def test_nullable_blankable(self):
         v = StringField(null=True, null_prob=0.3, blank=True, blank_prob=0.3)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             generated = v.generate()
             self.assertIsNone(generated)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             generated = v.generate()
             self.assertEqual(generated, '')
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -435,17 +438,17 @@ class StringFieldTestCase(unittest.TestCase):
         v = StringField(null=True, null_prob=0.3, blank=True, blank_prob=0.3,
                         choices=choices)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             generated = v.generate()
             self.assertIsNone(generated)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.choice = random.choice
             self.assertEqual(v.generate(), '')
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             self.assertIn(v.generate(), choices)
@@ -464,7 +467,7 @@ class ArrayFieldTestCase(unittest.TestCase):
         str_field = mock.Mock(wraps=StringField())
         str_field.generate = lambda: 'string'
         v = ArrayField([int_field, str_field])
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.randint.return_value = 2
 
             mocked_random.choice.side_effect = [int_field, str_field]
@@ -499,13 +502,13 @@ class ArrayFieldTestCase(unittest.TestCase):
             v.generate()
 
         v = ArrayField(IntegerField(), required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             with self.assertRaises(NotGeneratedException):
                 v.generate()
 
         v = ArrayField(IntegerField(), required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -515,7 +518,7 @@ class ArrayFieldTestCase(unittest.TestCase):
 
     def test_nullable(self):
         v = ArrayField(IntegerField(), null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -524,7 +527,7 @@ class ArrayFieldTestCase(unittest.TestCase):
             self.assertTrue(all([isinstance(i, int) for i in generated]))
 
         v = ArrayField(IntegerField(), null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -532,7 +535,7 @@ class ArrayFieldTestCase(unittest.TestCase):
 
     def test_blankable(self):
         v = ArrayField(IntegerField(), blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -541,7 +544,7 @@ class ArrayFieldTestCase(unittest.TestCase):
             self.assertTrue(all([isinstance(i, int) for i in generated]))
 
         v = ArrayField(IntegerField(), blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -551,19 +554,19 @@ class ArrayFieldTestCase(unittest.TestCase):
         v = ArrayField(IntegerField(), null=True, null_prob=0.3,
                        blank=True, blank_prob=0.3)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             self.assertEqual(v.generate(), [])
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -641,14 +644,16 @@ class ObjectFieldTestCase(unittest.TestCase):
         with self.assertRaises(NotGeneratedException):
             v.generate()
 
-        v = ObjectField(self.simple_schema, required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        v = ObjectField(self.simple_schema, required=False,
+                        not_present_prob=0.5)
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             with self.assertRaises(NotGeneratedException):
                 v.generate()
 
-        v = ObjectField(self.simple_schema, required=False, not_present_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        v = ObjectField(self.simple_schema, required=False,
+                        not_present_prob=0.5)
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -656,14 +661,14 @@ class ObjectFieldTestCase(unittest.TestCase):
 
     def test_nullable(self):
         v = ObjectField(self.simple_schema, null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             self.assertEqualSimpleSchema(v.generate())
 
         v = ObjectField(self.simple_schema, null=True, null_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -671,14 +676,14 @@ class ObjectFieldTestCase(unittest.TestCase):
 
     def test_blankable(self):
         v = ObjectField(self.simple_schema, blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             self.assertEqualSimpleSchema(v.generate())
 
         v = ObjectField(self.simple_schema, blank=True, blank_prob=0.5)
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
@@ -688,19 +693,19 @@ class ObjectFieldTestCase(unittest.TestCase):
         v = ObjectField(self.simple_schema, null=True, null_prob=0.3,
                         blank=True, blank_prob=0.3)
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             self.assertIsNone(v.generate())
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 0.5
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             self.assertEqual(v.generate(), {})
 
-        with mock.patch('mongo_dynamic_fixture.fields.random') as mocked_random:
+        with mock.patch(FIELDS_RANDOM_MODULE) as mocked_random:
             mocked_random.random.return_value = 1
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
