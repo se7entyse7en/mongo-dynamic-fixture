@@ -2,7 +2,10 @@ import string
 import random
 import unittest
 
-import mock
+try:
+    import mock
+except ImportError:
+    from unittest import mock
 
 from mongo_dynamic_fixture.fields import BaseField
 from mongo_dynamic_fixture.fields import IntegerField
