@@ -55,7 +55,7 @@ After that you can already generate your fixtures!
      'stats': {'average_daily_visits': 0.02137056342099064, 'last_day_visits': 21}}
 
 The function ``N`` takes an instance of ``BaseSchema`` as first argument and generates a fixture which is compliant with the schema provided.
-Obviously sometimes we would like to have more control over the fixture that we want generate, for this reason the ``N`` function also takes ``**kwargs`` opitional arguments to fix some specific fields:
+Obviously sometimes we would like to have more control over the fixture that we want generate, for this reason the ``N`` function also takes ``**kwargs`` optional arguments to fix some specific fields:
 ::
 
     In [3]: N(SiteSchema(), active=False, stats__last_day_visits=30)
