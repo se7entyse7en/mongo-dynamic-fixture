@@ -1,6 +1,12 @@
 mongo-dynamic-fixture: easy testing by dynamically creating mongo fixtures
 ==========================================================================
 
+.. image:: https://travis-ci.org/se7entyse7en/mongo-dynamic-fixture.svg?branch=master
+  :target: https://travis-ci.org/se7entyse7en/mongo-dynamic-fixture
+
+.. image:: https://coveralls.io/repos/se7entyse7en/mongo-dynamic-fixture/badge.svg?branch=master&service=github
+  :target: https://coveralls.io/github/se7entyse7en/mongo-dynamic-fixture?branch=master
+
 
 Motivation
 ----------
