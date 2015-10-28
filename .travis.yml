@@ -1,0 +1,41 @@
+language: python
+python: 2.7
+services:
+  - mongodb
+before_script:
+  - sleep 15
+env:
+  - TOX_ENV=py27-pymongo20
+  - TOX_ENV=py27-pymongo21
+  - TOX_ENV=py27-pymongo22
+  - TOX_ENV=py27-pymongo23
+  - TOX_ENV=py27-pymongo24
+  - TOX_ENV=py27-pymongo25
+  - TOX_ENV=py27-pymongo26
+  - TOX_ENV=py27-pymongo27
+  - TOX_ENV=py27-pymongo28
+  - TOX_ENV=py27-pymongo29
+  - TOX_ENV=py27-pymongo30
+  - TOX_ENV=py33-pymongo22
+  - TOX_ENV=py33-pymongo23
+  - TOX_ENV=py33-pymongo24
+  - TOX_ENV=py33-pymongo25
+  - TOX_ENV=py33-pymongo26
+  - TOX_ENV=py33-pymongo27
+  - TOX_ENV=py33-pymongo28
+  - TOX_ENV=py33-pymongo29
+  - TOX_ENV=py33-pymongo30
+  - TOX_ENV=py34-pymongo22
+  - TOX_ENV=py34-pymongo23
+  - TOX_ENV=py34-pymongo24
+  - TOX_ENV=py34-pymongo25
+  - TOX_ENV=py34-pymongo26
+  - TOX_ENV=py34-pymongo27
+  - TOX_ENV=py34-pymongo28
+  - TOX_ENV=py34-pymongo29
+  - TOX_ENV=py34-pymongo30
+  - TOX_ENV=flake8
+install:
+  - pip install -r requirements-test.txt
+script:
+  - tox -e $TOX_ENV
