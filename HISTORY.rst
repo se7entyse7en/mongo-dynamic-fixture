@@ -2,6 +2,12 @@ Release History
 ---------------
 
 
+v0.2.1
+^^^^^^
+
+- Fixed ``min_length`` of ``StringField`` and ``ArrayField`` from ``0`` to ``1``
+- Simplified interface of functions ``N`` and ``G``
+
 v0.2.0
 ^^^^^^
 
