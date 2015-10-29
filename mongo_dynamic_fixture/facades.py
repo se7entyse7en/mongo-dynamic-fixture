@@ -2,10 +2,13 @@ from mongo_dynamic_fixture.fixture import Fixture
 
 
 def N(*args, **kwargs):
-    schema = args[0] if args else None
+    schema_cls = args[0] if args else None
     extra = kwargs.pop('extra', {})
     kwargs.update(extra)
-    data = schema.generate(**kwargs) if schema is not None else kwargs
+    if schema_cls is not None:
+        data = schema_cls().generate(**kwargs)
+    else:
+        data = kwargs
 
     return data
 
