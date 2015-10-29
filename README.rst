@@ -19,7 +19,7 @@ Motivation
 Inspiration
 -----------
 
-This library is inspired from `django-dynamic-fixture <https://github.com/paulocheque/django-dynamic-fixture>`_.
+This library is inspired by `django-dynamic-fixture <https://github.com/paulocheque/django-dynamic-fixture>`_.
 
 
 Basic usage
