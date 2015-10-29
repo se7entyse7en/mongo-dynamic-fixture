@@ -47,7 +47,7 @@ After that you can already generate your fixtures!
 
     In [1]: from mongo_dynamic_fixture import N
 
-    In [2]: N(SiteSchema())
+    In [2]: N(SiteSchema)
     Out[2]:
     {'active': True,
      'aliases': ['kisxcp', 'lG', 'vH5', 'Q7oT1xi', 'RyooxkzB', 'FSFnP'],
@@ -58,7 +58,7 @@ The function ``N`` takes an instance of ``BaseSchema`` as first argument and gen
 Obviously sometimes we would like to have more control over the fixture that we want generate, for this reason the ``N`` function also takes ``**kwargs`` optional arguments to fix some specific fields:
 ::
 
-    In [3]: N(SiteSchema(), active=False, stats__last_day_visits=30)
+    In [3]: N(SiteSchema, active=False, stats__last_day_visits=30)
     Out[3]:
     {'active': False,
      'aliases': ['Euheq6sRgF',
@@ -75,13 +75,13 @@ Obviously sometimes we would like to have more control over the fixture that we 
 As you can see both ``active`` and ``last_day_visits`` has been set to the values provided. If the key you want to fix is at the top level of the object then just use the variable name, otherwise list all its ancestors by separating them with ``_`` as for ``stats__last_day_visits``. If the resulting ``**kwargs`` key is not a valid python variable name, then pass it inside the ``extra`` argument:
 ::
 
-    In [3]: N(MySchema(), field1=False, extra={'field2__some-invalid-name!': 30})
+    In [3]: N(MySchema, field1=False, extra={'field2__some-invalid-name!': 30})
 
 
 The ``G`` function does the same thing of the ``N`` function but additionaly takes a ``pymongo`` connection to a mongo collection as first argument:
 ::
 
-    In [4]: G(conn['test-db']['test-coll'], SiteSchema(), active=False, stats__last_day_visits=30)
+    In [4]: G(conn['test-db']['test-coll'], SiteSchema, active=False, stats__last_day_visits=30)
     Out[4]:
     {'active': False,
      'aliases': ['K8ae2uwdW',
