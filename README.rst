@@ -132,7 +132,8 @@ The blank fields for each fields are the following:
 - ``ArrayField`` -> ``[]``
 - ``ObjectField`` -> ``{}``
 
-``IntgerField`` and ``DoubleField`` also take ``min_value`` and ``max_value`` as optional arguments, and ``StringField`` and ``ArrayField`` also take ``min_length`` and ``max_length``.
+``IntegerField`` and ``DoubleField`` also take ``min_value`` and ``max_value`` as optional arguments, and ``StringField`` and ``ArrayField`` also take ``min_length`` and ``max_length``.
+``IntegerField``, ``DoubleField`` and ``StringField`` also take ``choices`` as optional argument which must be an iterable. In case that this argument is provided the generated value will one those present in the iterable.
 With ``StringField`` it's also possible to specify the charset of the string to generate by passing it to the ``charset`` optional argument (default: ``string.ascii_letters + string.digits``).
 
 Now you might ask "And what is the purpose of ``ObjectField``"? Suppose that you have a schema like the following:
