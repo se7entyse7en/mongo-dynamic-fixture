@@ -135,7 +135,7 @@ class StringField(ChoosableBaseField):
 
     blank_value = ''
 
-    def __init__(self, min_length=0, max_length=10, charset=None, **kwargs):
+    def __init__(self, min_length=1, max_length=10, charset=None, **kwargs):
         super(StringField, self).__init__(**kwargs)
         self._min_length = min_length
         self._max_length = max_length
@@ -163,7 +163,7 @@ class ArrayField(BaseField):
 
     blank_value = []
 
-    def __init__(self, content_fields, min_length=0, max_length=10, **kwargs):
+    def __init__(self, content_fields, min_length=1, max_length=10, **kwargs):
         super(ArrayField, self).__init__(**kwargs)
         self._min_length = min_length
         self._max_length = max_length
