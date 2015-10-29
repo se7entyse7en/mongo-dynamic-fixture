@@ -111,6 +111,22 @@ The available fields that are all importable from ``mongo_dynamic_fixture.fields
 - ``ObjectField``
 
 
+Using in a test case
+~~~~~~~~~~~~~~~~~~~~
+
+The easiest way to use the ``G`` function is to use it inside ``MongoTestCase`` which already provides a connection to a temporary mongo instance (using `mongobox <https://github.com/theorm/mongobox>`_) through the property ``mongo_client``:
+::
+
+    from mongo_dynamic_fixture.test import MongoTestCase
+
+    class MyTestCase(MongoTestCase):
+
+        def test_something(self):
+            dynamic_fixture = G(self.mongo_client['test-db']['test-coll'],
+                                SiteSchema, active=False, stats__last_day_visits=30)
+            ...
+
+
 A little more than basic usage
 ------------------------------
 
