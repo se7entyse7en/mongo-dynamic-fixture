@@ -319,7 +319,7 @@ class StringFieldTestCase(unittest.TestCase):
     def test_default(self):
         v = StringField()
         generated = v.generate()
-        self.assertTrue(0 <= len(generated) <= 10)
+        self.assertTrue(1 <= len(generated) <= 10)
         self.assertTrue(all([s in (string.ascii_letters + string.digits)
                              for s in generated]))
 
@@ -342,13 +342,13 @@ class StringFieldTestCase(unittest.TestCase):
         charset = '!@#$%^&*()_'
         v = StringField(charset=charset)
         generated = v.generate()
-        self.assertTrue(0 <= len(generated) <= 10)
+        self.assertTrue(1 <= len(generated) <= 10)
         self.assertTrue(all([s in charset for s in generated]))
 
     def test_not_required(self):
         v = StringField(required=False, not_present_prob=0)
         generated = v.generate()
-        self.assertTrue(0 <= len(generated) <= 10)
+        self.assertTrue(1 <= len(generated) <= 10)
         self.assertTrue(all([s in (string.ascii_letters + string.digits)
                              for s in generated]))
 
@@ -368,7 +368,7 @@ class StringFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([s in (string.ascii_letters + string.digits)
                                  for s in generated]))
 
@@ -379,7 +379,7 @@ class StringFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([s in (string.ascii_letters + string.digits)
                                  for s in generated]))
 
@@ -396,7 +396,7 @@ class StringFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([s in (string.ascii_letters + string.digits)
                                  for s in generated]))
 
@@ -429,7 +429,7 @@ class StringFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([s in (string.ascii_letters + string.digits)
                                  for s in generated]))
 
@@ -459,7 +459,7 @@ class ArrayFieldTestCase(unittest.TestCase):
     def test_default(self):
         v = ArrayField(IntegerField())
         generated = v.generate()
-        self.assertTrue(0 <= len(generated) <= 10)
+        self.assertTrue(1 <= len(generated) <= 10)
         self.assertTrue(all([isinstance(i, int) for i in generated]))
 
         int_field = mock.Mock(wraps=IntegerField())
@@ -494,7 +494,7 @@ class ArrayFieldTestCase(unittest.TestCase):
     def test_not_required(self):
         v = ArrayField(IntegerField(), required=False, not_present_prob=0)
         generated = v.generate()
-        self.assertTrue(0 <= len(generated) <= 10)
+        self.assertTrue(1 <= len(generated) <= 10)
         self.assertTrue(all([isinstance(i, int) for i in generated]))
 
         v = ArrayField(IntegerField(), required=False, not_present_prob=1)
@@ -513,7 +513,7 @@ class ArrayFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([isinstance(i, int) for i in generated]))
 
     def test_nullable(self):
@@ -523,7 +523,7 @@ class ArrayFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([isinstance(i, int) for i in generated]))
 
         v = ArrayField(IntegerField(), null=True, null_prob=0.5)
@@ -540,7 +540,7 @@ class ArrayFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([isinstance(i, int) for i in generated]))
 
         v = ArrayField(IntegerField(), blank=True, blank_prob=0.5)
@@ -571,7 +571,7 @@ class ArrayFieldTestCase(unittest.TestCase):
             mocked_random.choice = random.choice
             mocked_random.randint = random.randint
             generated = v.generate()
-            self.assertTrue(0 <= len(generated) <= 10)
+            self.assertTrue(1 <= len(generated) <= 10)
             self.assertTrue(all([isinstance(i, int) for i in generated]))
 
 
