@@ -16,6 +16,12 @@ Motivation
 * If a static json fixture is used in more than one test case even a little change can break all test cases
 
 
+Inspiration
+-----------
+
+This library is inspired from `django-dynamic-fixture <https://github.com/paulocheque/django-dynamic-fixture>`_.
+
+
 Basic usage
 -----------
 
