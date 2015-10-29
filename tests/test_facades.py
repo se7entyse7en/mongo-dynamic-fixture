@@ -35,7 +35,7 @@ class FacadesTestCase(MongoTestCase):
         self.assertEqual(actual_data, expected_data)
 
     def test_N_with_schema_no_extra(self):
-        actual_data = N(SimpleTestSchema(), _id='123', nest_3__double=999.999)
+        actual_data = N(SimpleTestSchema, _id='123', nest_3__double=999.999)
 
         self.assertEqual(
             set(actual_data.keys()),
@@ -57,7 +57,7 @@ class FacadesTestCase(MongoTestCase):
         self.assertEqual(actual_data['nest_3']['double'], 999.999)
 
     def test_N_with_schema(self):
-        actual_data = N(SimpleTestSchema(), _id='123', nest_3__double=999.999,
+        actual_data = N(SimpleTestSchema, _id='123', nest_3__double=999.999,
                         extra={'nest-1__nest-2__string': 'abcdef',
                                'nest-1__integer': 10000})
 
@@ -108,7 +108,7 @@ class FacadesTestCase(MongoTestCase):
         self.assertEqual(documents[0], expected_data)
 
     def test_G_with_schema_no_extra(self):
-        actual_data = G(self.conn, SimpleTestSchema(), _id='123',
+        actual_data = G(self.conn, SimpleTestSchema, _id='123',
                         nest_3__double=999.999)
 
         documents = list(self.conn.find())
@@ -133,7 +133,7 @@ class FacadesTestCase(MongoTestCase):
             self.assertEqual(data['nest_3']['double'], 999.999)
 
     def test_G_with_schema(self):
-        actual_data = G(self.conn, SimpleTestSchema(), _id='123',
+        actual_data = G(self.conn, SimpleTestSchema, _id='123',
                         nest_3__double=999.999,
                         extra={'nest-1__nest-2__string': 'abcdef',
                                'nest-1__integer': 10000})
