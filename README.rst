@@ -22,11 +22,10 @@ Inspiration
 This library is inspired by `django-dynamic-fixture <https://github.com/paulocheque/django-dynamic-fixture>`_.
 
 
-Basic usage
------------
+Getting Started
+---------------
 
-The basic functions are ``N`` and ``G`` that stand for *New* and *Get* respectively.
-First you have to define the schema of the data that you want to generate:
+You just have to define the schema of the data you want to generate:
 ::
 
     from mongo_dynamic_fixture.schema import BaseSchema
@@ -60,6 +59,16 @@ After that you can already generate your fixtures!
      'name': 'oCmy0ZsGS',
      'stats': {'average_daily_visits': 0.02137056342099064, 'last_day_visits': 21}}
 
+
+Basic usage
+-----------
+
+The basic functions are ``N`` and ``G`` that stand for *New* and *Get* respectively.
+
+
+The ``N`` function
+~~~~~~~~~~~~~~~~~~
+
 The function ``N`` takes an instance of ``BaseSchema`` as first argument and generates a fixture which is compliant with the schema provided.
 Obviously sometimes we would like to have more control over the fixture that we want generate, for this reason the ``N`` function also takes ``**kwargs`` optional arguments to fix some specific fields:
 ::
@@ -78,11 +87,14 @@ Obviously sometimes we would like to have more control over the fixture that we 
      'name': 'KEKasgW',
      'stats': {'average_daily_visits': 0.44985850259520865, 'last_day_visits': 30}}
 
-As you can see both ``active`` and ``last_day_visits`` has been set to the values provided. If the key you want to fix is at the top level of the object then just use the variable name, otherwise list all its ancestors by separating them with ``_`` as for ``stats__last_day_visits``. If the resulting ``**kwargs`` key is not a valid python variable name, then pass it inside the ``extra`` argument:
+As you can see both ``active`` and ``last_day_visits`` has been set to the values provided. If the key you want to fix is at the top level of the object then just use the variable name, otherwise list all its ancestors by separating them with ``__`` as for ``stats__last_day_visits``. If the resulting ``**kwargs`` key is not a valid python variable name, then pass it inside the ``extra`` argument:
 ::
 
     In [3]: N(MySchema, field1=False, extra={'field2__some-invalid-name!': 30})
 
+
+The ``G`` function
+~~~~~~~~~~~~~~~~~~
 
 The ``G`` function does the same thing of the ``N`` function but additionaly takes a ``pymongo`` connection to a mongo collection as first argument:
 ::
@@ -130,6 +142,9 @@ The easiest way to use the ``G`` function is to use it inside ``MongoTestCase`` 
 A little more than basic usage
 ------------------------------
 
+Optional arguments
+~~~~~~~~~~~~~~~~~~
+
 Each fields takes the following optional arguments:
 
 - ``required`` (default: ``True``)
@@ -157,6 +172,10 @@ The blank fields for each fields are the following:
 ``IntegerField`` and ``DoubleField`` also take ``min_value`` and ``max_value`` as optional arguments, and ``StringField`` and ``ArrayField`` also take ``min_length`` and ``max_length``.
 ``IntegerField``, ``DoubleField`` and ``StringField`` also take ``choices`` as optional argument which must be an iterable. In case that this argument is provided the generated value will one those present in the iterable.
 With ``StringField`` it's also possible to specify the charset of the string to generate by passing it to the ``charset`` optional argument (default: ``string.ascii_letters + string.digits``).
+
+
+``ObjectField`` and DRY
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Now you might ask "And what is the purpose of ``ObjectField``"? Suppose that you have a schema like the following:
 ::
